@@ -1,0 +1,12 @@
+<p> Login comp works </p>
+
+<div *ngIf="auth.user$ | async as mat; else login">
+    <pre>
+    {{ mat | json }}
+    </pre>
+    <button (click)="auth.singOut()">Sign out</button>
+</div>
+
+<ng-template #login>
+    <button (click)="auth.googleSignin()">Sing in with Google Account</button>
+</ng-template>

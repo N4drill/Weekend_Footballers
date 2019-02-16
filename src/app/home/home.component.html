@@ -1,0 +1,8 @@
+<p>
+  home works!
+</p>
+<div *ngIf="auth.user$ | async as mat; else login">
+  <pre>
+    {{ mat | json }}
+    </pre>
+</div>
