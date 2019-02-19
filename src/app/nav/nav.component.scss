@@ -1,3 +1,27 @@
-nav {
-    height: 10vh;
+.spacer {
+  flex: 1 1 auto;
+}
+
+ul {
+  padding-right: 30px;
+  li {
+    a {
+      font-size: 18px;
+
+      &:hover {
+        color: rgb(116, 140, 248);
+        transition: 100ms color ease-in;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+header {
+  height: 10vh;
+}
+
+.log-button {
+  min-width: 8vw;
+  width: 8vw;
 }

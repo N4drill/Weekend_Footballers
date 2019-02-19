@@ -8,9 +8,14 @@ import { AuthService } from '../core/auth.service';
 })
 export class NavComponent implements OnInit {
 
+  navbarOpen = false;
+
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
   }
 
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }
