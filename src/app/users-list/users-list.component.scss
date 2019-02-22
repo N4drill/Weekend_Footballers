@@ -1,0 +1,31 @@
+span {
+  font-family: "Montserrat";
+  font-size: 18px;
+}
+
+.star {
+  font-size: 3rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #1b82e9;
+}
+
+h3 {
+  color: #165ea5;
+  margin-top:15px;
+  margin-bottom: 10px;
+}
+
+mat-card{
+    margin-top: 10px;
+
+    &:hover{
+        background: #addceb;
+        transform : scale(1.05);
+        font-weight: bold;
+       
+        transition: 300ms background ease-in-out;
+        transition: 150ms transform ease-in
+    }
+}

@@ -1,6 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+html, body{
+    font-family: 'Montserrat';
+}
 
 .bg-default{
     background-color: #184dca;
 }
+
+section{
+    padding-top: 2vh;
+}
+
+.avatar-mini{
+    border-radius: 100%;
+    width: 100px;
+    height: 100px; 
+}
+

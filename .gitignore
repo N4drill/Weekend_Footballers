@@ -5,6 +5,10 @@
 /tmp
 /out-tsc
 
+# Assets avatars
+/assets/avatars
+/assets/avatars/*
+
 # dependencies
 /node_modules
 

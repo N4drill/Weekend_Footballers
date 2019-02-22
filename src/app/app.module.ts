@@ -17,6 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
+import { UsersListComponent } from './users-list/users-list.component';
+
+import {NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +28,8 @@ import {MaterialModule} from './material.module';
     LoginComponent,
     HomeComponent,
     NavComponent,
-    PlayerFormComponent
+    PlayerFormComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import {MaterialModule} from './material.module';
     CoreModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
