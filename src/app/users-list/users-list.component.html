@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>Players in your city:</h1>
+
+  <h3>Goalkeepers: </h3>
+  <mat-card *ngFor="let user of fakeGoalkeepers">
+    <div class="row px-4 py-2">
+      <img src="../../assets/avatar_placeholder.png" alt="avatar" class="img avatar-mini">
+      <span class="my-auto ml-4">{{user.name}}</span>
+      <ngb-rating class="my-auto ml-auto mr-4" [(rate)]="user.rating" [starTemplate]="startemplate" [readonly]="true"
+        max="5"></ngb-rating>
+      <span class="my-auto mr-4" style="min-width: 5vw; width: 7vw; text-align: end;"><b>{{user.position}}</b></span>
+    </div>
+  </mat-card>
+
+  <h3>Defenders: </h3>
+  <mat-card *ngFor="let user of fakeDefenders">
+    <div class="row px-4 py-2">
+      <img src="../../assets/avatar_placeholder.png" alt="avatar" class="img avatar-mini">
+      <span class="my-auto ml-4">{{user.name}}</span>
+      <ngb-rating class="my-auto ml-auto mr-4" [(rate)]="user.rating" [starTemplate]="startemplate" [readonly]="true"
+        max="5"></ngb-rating>
+      <span class="my-auto mr-4" style="min-width: 5vw; width: 7vw; text-align: end;"><b>{{user.position}}</b></span>
+    </div>
+  </mat-card>
+
+  <h3>Midfielders: </h3>
+  <mat-card *ngFor="let user of fakeMidfielders">
+    <div class="row px-4 py-2">
+      <img src="../../assets/avatar_placeholder.png" alt="avatar" class="img avatar-mini">
+      <span class="my-auto ml-4">{{user.name}}</span>
+      <ngb-rating class="my-auto ml-auto mr-4" [(rate)]="user.rating" [starTemplate]="startemplate" [readonly]="true"
+        max="5"></ngb-rating>
+      <span class="my-auto mr-4" style="min-width: 5vw; width: 7vw; text-align: end;"><b>{{user.position}}</b></span>
+    </div>
+  </mat-card>
+
+  <h3>Strickers: </h3>
+  <mat-card *ngFor="let user of fakeStrickers">
+    <div class="row px-4 py-2">
+        <img src="../../assets/avatar_placeholder.png" alt="avatar" class="img avatar-mini">
+      <span class="my-auto ml-4">{{user.name}}</span>
+      <ngb-rating class="my-auto ml-auto mr-4" [(rate)]="user.rating" [starTemplate]="startemplate" [readonly]="true"
+        max="5"></ngb-rating>
+      <span class="my-auto mr-4" style="min-width: 5vw; width: 7vw; text-align: end;"><b>{{user.position}}</b></span>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #startemplate let-fill="fill" let-index="index">
+  <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+</ng-template>
