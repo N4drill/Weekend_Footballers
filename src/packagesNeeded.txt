@@ -1,0 +1,11 @@
+Material 
+https://material.angular.io/guide/getting-started
+
+Angular Bootstrap 
+https://ng-bootstrap.github.io/#/getting-started
+
+Bootstrap 
+https://codeburst.io/getting-started-with-angular-7-and-bootstrap-4-styling-6011b206080
+
+Angular Firestore - AngularFire
+https://github.com/angular/angularfire2/blob/master/docs/install-and-setup.md
