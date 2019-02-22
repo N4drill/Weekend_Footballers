@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { of, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -9,13 +12,22 @@ import { AuthService } from '../core/auth.service';
 export class NavComponent implements OnInit {
 
   navbarOpen = false;
+  avatarImage$: Observable<string> = of('../../assets/avatar_placeholder.png');
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, private storage: AngularFireStorage) {
+  }
 
   ngOnInit() {
+    this.auth.user$.subscribe((user) => {
+      this.updateAvatar(user);
+    });
   }
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
+  }
+
+  async updateAvatar(user) {
+    this.avatarImage$ = this.storage.ref(user.photoURL).getDownloadURL();
   }
 }

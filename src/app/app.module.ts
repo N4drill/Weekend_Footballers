@@ -22,6 +22,7 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
+import { SignOutComponent } from './sign-out/sign-out.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FooterComponent } from './footer/footer.component';
     NavComponent,
     PlayerFormComponent,
     UsersListComponent,
-    FooterComponent
+    FooterComponent,
+    SignOutComponent
   ],
   imports: [
     BrowserModule,

@@ -106,11 +106,9 @@ export class PlayerFormComponent implements OnInit {
     if (this.userAvatarFile === null) {
       return;
     }
-    // const customMetaData = { app: 'Web-Weekend-Footballers' };
-    console.log([this.userAvatarFile]);
     // Upload task
-    this.uploadTask = this.storage.upload(this.userAvatarPath, this.userAvatarFile);
     this.userAvatarPath = `${Constants.FireStorage.PHOTOS}${this.currentUserUID}`;
+    this.uploadTask = this.storage.upload(this.userAvatarPath, this.userAvatarFile);
     this.uploadPercentage = this.uploadTask.percentageChanges();
   }
 
@@ -139,9 +137,9 @@ export class PlayerFormComponent implements OnInit {
       isValid: true,
       uid: this.currentUserUID,
       name: this.firstName.value + ' ' + this.secondName.value,
-      avatarPath: this.userAvatarPath,
+      photoURL: this.userAvatarPath,
       position: this.position.value,
-      nickname: this.nickName.value,
+      pseudo: this.nickName.value,
       rating: 0
     } as User, { merge: true });
   }
