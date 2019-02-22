@@ -6,8 +6,8 @@
 /out-tsc
 
 # Assets avatars
-/assets/avatars
-/assets/avatars/*
+src/assets/*
+
 
 # dependencies
 /node_modules
