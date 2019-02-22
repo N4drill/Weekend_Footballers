@@ -12,7 +12,7 @@ import { finalize } from 'rxjs/operators';
 export class NavComponent implements OnInit {
 
   navbarOpen = false;
-  avatarImage$: Observable<string> = of('../../assets/avatar_placeholder.png');
+  avatarImage$: Observable<string>;
 
   constructor(public auth: AuthService, private storage: AngularFireStorage) {
   }

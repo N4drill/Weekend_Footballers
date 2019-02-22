@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FakeUsers } from '../../model/fakeusers';
 import { User } from '../../model/user.model';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Constants } from 'src/constants/constants';
+import { take } from 'rxjs/operators';
 
+interface UserURLMap {
+  user: User;
+  photo: any;
+}
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -9,33 +17,73 @@ import { User } from '../../model/user.model';
 })
 export class UsersListComponent implements OnInit {
 
-  fakeGoalkeepers: User[];
-  fakeDefenders: User[];
-  fakeMidfielders: User[];
-  fakeStrickers: User[];
+  private usersCollection: AngularFirestoreCollection<User>;
+
+  goalkeepers: UserURLMap[] = [];
+  defenders: UserURLMap[] = [];
+  midfielders: UserURLMap[] = [];
+  strickers: UserURLMap[] = [];
+
+  allUsers: User[];
+  allArrays: any;
 
 
-  constructor() { }
+  constructor(private afs: AngularFirestore, private storage: AngularFireStorage) { }
 
   ngOnInit() {
-    this.initPositionArrays(FakeUsers);
-  }
+    this.usersCollection = this.afs.collection<User>(`${Constants.FirestoreColletions.USERS}`);
+    this.usersCollection.valueChanges().subscribe((usersArray) => {
+      this.allUsers = usersArray;
+      this.getUsers();
+      this.allArrays = [
+        { name: 'Goalkeepers', usersMap: this.goalkeepers },
+        { name: 'Defenders', usersMap: this.defenders },
+        { name: 'Midfielders', usersMap: this.midfielders },
+        { name: 'Strickers', usersMap: this.strickers }
+      ];
 
-
-  private initPositionArrays(fakeUsers: User[]) {
-    this.fakeGoalkeepers = this.initPositionArray(fakeUsers, 'Bramkarz');
-    this.fakeDefenders = this.initPositionArray(fakeUsers, 'Obrońca');
-    this.fakeMidfielders = this.initPositionArray(fakeUsers, 'Pomocnik');
-    this.fakeStrickers = this.initPositionArray(fakeUsers, 'Napastnik');
-  }
-
-  private initPositionArray(fakeUsers: User[], position: string) {
-    const result = [];
-    fakeUsers.forEach(user => {
-      if (user.position === position) {
-        result.push(user);
-      }
+      console.log(`allUsers: ${this.allUsers}`);
+      console.log(`allArrays: ${this.allArrays}`);
+      console.log(`goalkeepers: ${this.goalkeepers}`);
     });
-    return result;
+  }
+
+  private getUsers() {
+    this.allUsers.forEach(u => {
+      this.storage.ref(u.photoURL).getDownloadURL()
+        .pipe(take(1))
+        .subscribe(url => {
+          this.placeUser(u, url);
+        });
+    });
+  }
+
+  placeUser(u: User, url) {
+    switch (u.position) {
+      case 'Bramkarz':
+        this.goalkeepers.push({
+          user: u,
+          photo: url
+        });
+        break;
+      case 'Obrońca':
+        this.defenders.push({
+          user: u,
+          photo: url
+        });
+        break;
+      case 'Pomocnik':
+        this.midfielders.push({
+          user: u,
+          photo: url
+        });
+        break;
+      case 'Napastnik':
+        this.strickers.push({
+          user: u,
+          photo: url
+        });
+        break;
+    }
   }
 }

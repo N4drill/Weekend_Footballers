@@ -107,7 +107,7 @@ export class PlayerFormComponent implements OnInit {
       return;
     }
     // Upload task
-    this.userAvatarPath = `${Constants.FireStorage.PHOTOS}${this.currentUserUID}`;
+    this.userAvatarPath = `${Constants.FireStorage.PHOTOS}${this.currentUserUID}.png`;
     this.uploadTask = this.storage.upload(this.userAvatarPath, this.userAvatarFile);
     this.uploadPercentage = this.uploadTask.percentageChanges();
   }
