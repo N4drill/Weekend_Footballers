@@ -39,6 +39,7 @@ export class AuthService {
           this.navigateToCorrectPage(credendial.user);
         } else {
           this.createNewUser(credendial.user);
+          this.router.navigate(['/form']);
         }
       });
   }
@@ -65,11 +66,7 @@ export class AuthService {
     const data = {
       isValid: false,
       uid: user.uid,
-      name: user.displayName,
-      photoURL: '',
-      position: '',
-      pseudo: '',
-      rating: 0,
+      name: user.displayName
     };
 
     userRef.set(data, { merge: true });

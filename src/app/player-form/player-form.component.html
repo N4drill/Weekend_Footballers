@@ -1,3 +1,128 @@
-<p>
-  player-form works!
-</p>
+<div class="container">
+    <mat-horizontal-stepper linear="true">
+
+        <!-- WELCOME STEP-->
+
+        <mat-step label="Get started">
+            
+            <div class="row" style="text-align: center; margin-top: 2vh;">
+                <div class="col-sm-12"><h1>We need to know you better!</h1></div>
+                <div class="col-sm-12"><h3>Take a while and fill this form</h3></div>
+                <div class="col-sm-12"><h3>It is necessary for proper working of application</h3></div>
+                <div class="col-sm-12" style="margin-top: 20px;">
+                    <button  mat-raised-button color="primary" matStepperNext id="start_form_button"> Lets Go!</button>
+                </div>
+                
+            </div>
+        </mat-step>
+
+        <!-- FIRST FORM STEP-->
+
+        <mat-step label="Basic informations" [stepControl]="firstStepGroup">
+            <form [formGroup]="firstStepGroup">
+                <div class="row">
+                    <mat-form-field class="offset-sm-1 col-sm-10 offset-sm-1">
+                        <input matInput placeholder="First name" formControlName="firstName" required>
+                        <mat-hint style="text-align: end">Your name should start with capital letter</mat-hint>
+                        <mat-error *ngIf="firstName.invalid && firstName.touched">Something is wrong with your name or
+                            it's empty</mat-error>
+                        <mat-error *ngIf="firstName.invalid && firstName.untouched">You need to enter your name
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="offset-sm-1 col-sm-10 offset-sm-1">
+                        <input matInput placeholder="Second name" formControlName="secondName" required>
+                        <mat-hint style="text-align: end">Your second name should start with capital letter</mat-hint>
+                        <mat-error *ngIf="secondName.invalid && secondName.touched">Something is wrong with your
+                            surname or it's empty</mat-error>
+                        <mat-error *ngIf="secondName.invalid && secondName.untouched">You need to enter your name
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="offset-sm-1 col-sm-10 offset-sm-1">
+                        <input matInput placeholder="Nickname" formControlName="nickName">
+                        <mat-hint style="text-align: end">(Nickname is optional)</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="offset-sm-1 col-sm-10 offset-sm-1">
+                        <mat-select placeholder="Position" formControlName="position" required>
+                            <mat-option *ngFor="let pos of avaiblePositions" [value]="pos">
+                                {{pos}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint style="text-align: end">You need to choose position</mat-hint>
+                    </mat-form-field>
+
+                </div>
+                <div class="row justify-content-center">
+                    <button mat-button matStepperNext class="next_button"
+                        [disabled]="firstStepGroup.invalid">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- AVATAR FORM STEP-->
+        <mat-step label="Avatar">
+            <div class="row">
+                <div *ngIf="croppedImage" class="col-sm-6" style="text-align: center;">
+                    <h3 *ngIf="croppedImage">Your avatar:</h3>
+                    <img class="avatar" [src]="croppedImage" />
+                </div>
+                <div [ngClass]="croppedImage ? 'col-sm-6' : 'col-sm-12'" style="text-align: center; max-height: 80vh;">
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                        [aspectRatio]="1 / 1" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)"
+                        [roundCropper]="true" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()">
+                    </image-cropper>
+                    <button style="width:50%;" onClick="document.getElementById('fileinput').click()" mat-raised-button
+                        color="primary">Select Picture
+                    </button>
+                    <input id="fileinput" mat-raised-button color="primary" style="display:none;" type="file"
+                        (change)="fileChangeEvent($event)" accept="image/png" />
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button color="primary" matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+
+        <!-- FINALIZE FORM STEP-->
+        <mat-step label="Finilize">
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-list role="list">
+                        <mat-list-item role="listitem"> <b>First Name:</b> {{firstStepGroup.value.firstName}}
+                        </mat-list-item>
+                        <mat-list-item role="listitem"> <b>Second Name:</b> {{firstStepGroup.value.secondName}}
+                        </mat-list-item>
+                        <mat-list-item *ngIf="firstStepGroup.value.nickName" role="listitem"> <b>Nickname:</b>
+                            {{firstStepGroup.value.nickName}}
+                        </mat-list-item>
+                        <mat-list-item role="listitem"> <b>Position:</b> {{firstStepGroup.value.position}}
+                        </mat-list-item>
+                    </mat-list>
+
+                </div>
+                <div class="col-sm-6" style="text-align: center;">
+                    <img class="avatar" [src]="croppedImage" />
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <mat-checkbox labelPosition="before" [(ngModel)]="checked">Is everything OK?</mat-checkbox>
+            </div>
+            <div class="row justify-content-center">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button color="primary" [disabled]="!checked" (click)="completeForm()">Finalize!</button>
+            </div>
+            <div *ngIf="percentage | async as pct" class="row justify-content-center">
+                <progress [value]="pct" max="100"> </progress>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+
+    <div>
+        <p>{{firstStepGroup.value | json}}</p>
+        <p>Path: {{userAvatarPath}}</p>
+    </div>
+</div>
