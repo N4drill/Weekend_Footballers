@@ -1,0 +1,11 @@
+<footer style="border: 2px solid rgb(80, 53, 175); border-radius:2px;">
+  <h4>Current user info: </h4>
+  <div *ngIf="auth.user$ | async as user; else login">
+    <pre>
+      {{ user | json }}
+    </pre>
+  </div>
+</footer>
+<ng-template #login>
+  <p>Used not logged</p>
+</ng-template>

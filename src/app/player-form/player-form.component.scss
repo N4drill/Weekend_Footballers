@@ -1,0 +1,24 @@
+.next_button{
+    width: 80%;
+}
+
+.image-card{
+    display:grid;
+    grid-row-gap: 1em;
+    grid-template-columns:100%;
+    grid-template-rows: repeat(10, auto);
+}
+
+.image-preview{
+    grid-row: 1 / 10;
+
+}
+
+.image-preview img{
+    height: 70vh;
+}
+
+#start_form_button{
+    padding: 0.5em 1em 0.5em 1em;
+    font-size:1.5em;
+}
