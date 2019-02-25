@@ -19,6 +19,8 @@ import { Observable } from 'rxjs';
 })
 export class PlayerFormComponent implements OnInit {
 
+  show = false;
+
   firstStepGroup: FormGroup;
 
   avaiblePositions: string[];
@@ -52,7 +54,19 @@ export class PlayerFormComponent implements OnInit {
     this.authService.user$.pipe(take(1))
       .subscribe(
         (user => {
-          this.currentUserUID = user.uid;
+          if (user !== null) {
+            if (user.isValid) {
+              this.router.navigate(['/']); // If user is auth and valid, go to home
+            }
+            this.currentUserUID = user.uid;
+            this.show = true;
+          } else {
+            // If user is not Auth it should navigate him to login page istead of Form
+            // Now its just for testing purposes
+            // Also need to implement Firebase rules for security of data and files
+            this.show = true;
+            this.currentUserUID = this.firestore.createId();
+          }
         })
       );
 
@@ -135,7 +149,7 @@ export class PlayerFormComponent implements OnInit {
     console.log('Adding player');
     this.playersCollection.doc(this.currentUserUID).set({
       isValid: true,
-      uid: this.currentUserUID,
+      uid: this.currentUserUID ,
       name: this.firstName.value + ' ' + this.secondName.value,
       photoURL: this.userAvatarPath,
       position: this.position.value,

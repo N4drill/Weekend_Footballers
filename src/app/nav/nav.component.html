@@ -18,7 +18,11 @@
 </header>
 
 <ng-template #needLogin>
-  <ul class="navbar-nav ml-auto"></ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+      <a class="nav-link active" routerLink="form">Form</a>
+    </li>
+  </ul>
   <button class="log-button" mat-raised-button routerLink="login">Log in</button>
 </ng-template>
 
@@ -38,19 +42,16 @@
     </li>
   </ul>
   <div class="btn-group" id="menu_button">
-    <img *ngIf="avatarImage$" id="avatar_nav" [src]="avatarImage$ | async">  
-    <button  type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-      </button>
-      <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" >Placeholder</a>
-        <a class="dropdown-item" >Placeholder</a>
-        <a class="dropdown-item" >Placeholder</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="auth.singOut()">Sign out</a>
-      </div>
+    <img *ngIf="avatarImage$" id="avatar_nav" [src]="avatarImage$ | async">
+    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item">Placeholder</a>
+      <a class="dropdown-item">Placeholder</a>
+      <a class="dropdown-item">Placeholder</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="auth.singOut()">Sign out</a>
+    </div>
   </div>
   <!--<button class="log-button" mat-raised-button (click)="auth.singOut()">Sign Out</button>-->
 </ng-template>
-
-
-

@@ -1,18 +1,23 @@
-<div class="container">
+<div *ngIf="show" class="container">
     <mat-horizontal-stepper linear="true">
-
         <!-- WELCOME STEP-->
 
         <mat-step label="Get started">
-            
+
             <div class="row" style="text-align: center; margin-top: 2vh;">
-                <div class="col-sm-12"><h1>We need to know you better!</h1></div>
-                <div class="col-sm-12"><h3>Take a while and fill this form</h3></div>
-                <div class="col-sm-12"><h3>It is necessary for proper working of application</h3></div>
-                <div class="col-sm-12" style="margin-top: 20px;">
-                    <button  mat-raised-button color="primary" matStepperNext id="start_form_button"> Lets Go!</button>
+                <div class="col-sm-12">
+                    <h1>We need to know you better!</h1>
                 </div>
-                
+                <div class="col-sm-12">
+                    <h3>Take a while and fill this form</h3>
+                </div>
+                <div class="col-sm-12">
+                    <h3>It is necessary for proper working of application</h3>
+                </div>
+                <div class="col-sm-12" style="margin-top: 20px;">
+                    <button mat-raised-button color="primary" matStepperNext id="start_form_button"> Lets Go!</button>
+                </div>
+
             </div>
         </mat-step>
 
@@ -75,7 +80,7 @@
                         color="primary">Select Picture
                     </button>
                     <input id="fileinput" mat-raised-button color="primary" style="display:none;" type="file"
-                        (change)="fileChangeEvent($event)" accept="image/png" />
+                        (change)="fileChangeEvent($event)" accept="image/png, image/jpeg, image/jpg" />
                 </div>
             </div>
 
@@ -124,5 +129,6 @@
     <div>
         <p>{{firstStepGroup.value | json}}</p>
         <p>Path: {{userAvatarPath}}</p>
+        <p *ngIf="!isAuth" style="color:red; font-weight: bold;">Adding player as an Admin!</p>
     </div>
 </div>

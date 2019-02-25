@@ -41,10 +41,6 @@ export class UsersListComponent implements OnInit {
         { name: 'Midfielders', usersMap: this.midfielders },
         { name: 'Strickers', usersMap: this.strickers }
       ];
-
-      console.log(`allUsers: ${this.allUsers}`);
-      console.log(`allArrays: ${this.allArrays}`);
-      console.log(`goalkeepers: ${this.goalkeepers}`);
     });
   }
 

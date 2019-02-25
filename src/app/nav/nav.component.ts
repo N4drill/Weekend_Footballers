@@ -19,7 +19,9 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.auth.user$.subscribe((user) => {
-      this.updateAvatar(user);
+      if (user !== null) {
+        this.updateAvatar(user);
+      }
     });
   }
 
